@@ -1,0 +1,75 @@
+<div class="container flex">
+  <div>
+    <div class="form-container" fxLayout="row" fxLayoutAlign="center">
+      <mat-card fxFlex="100%" fxFlex.sm="100%" fxFlex.md="100%" fxFlex.gt-md="100%" class="login-box">
+        <form (ngSubmit)="search()" [formGroup]="headerForm" novalidate>
+          <div class="cm-error" [hidden]="!error || isLoading" translate>
+            Username or password incorrect.
+          </div>
+          <br/>
+          <div fxLayout="column">
+            <mat-form-field>
+              <input type="text" matInput formControlName="invoice" autocomplete="invoice-number"
+                     [placeholder]="'Invoice' | translate"/>
+              <mat-error *ngIf="headerForm.controls.invoice.valid || headerForm.controls.invoice.untouched">
+                <span translate>Invoice is required</span>
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+              <input type="text" matInput formControlName="supplier" autocomplete="supplier-name"
+                     [placeholder]="'Supplier' | translate"/>
+              <mat-error *ngIf="headerForm.controls.supplier.valid || headerForm.controls.supplier.untouched">
+                <span translate>Supplier is required</span>
+              </mat-error>
+            </mat-form-field>            
+            <br/>
+            <button mat-raised-button color="primary" type="submit" [disabled]="headerForm.invalid || isLoading">
+              <app-loader class="inline-loader" [isLoading]="isLoading"></app-loader>
+              <span translate>Search</span>
+            </button>
+          </div>
+        </form>
+      </mat-card>
+    </div>
+
+    <br/>
+
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource">
+    
+        <!-- Position Column -->
+        <ng-container matColumnDef="position">
+          <th mat-header-cell *matHeaderCellDef> No. </th>
+          <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+        </ng-container>
+    
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+    
+        <!-- Weight Column -->
+        <ng-container matColumnDef="weight">
+          <th mat-header-cell *matHeaderCellDef> Weight </th>
+          <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+        </ng-container>
+    
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="symbol">
+          <th mat-header-cell *matHeaderCellDef> Symbol </th>
+          <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+        </ng-container>
+    
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    </div>
+    <br/>
+    <div>
+      <embed src="http://www.pdf995.com/samples/pdf.pdf" type="application/pdf" width="100%" height="600px" />
+    </div>
+  </div>
+</div>

@@ -1,0 +1,26 @@
+.container {
+  text-align: center;  
+  padding: 1em;
+}
+
+.flex {
+  display: flex;
+  flex-flow: row wrap;
+  margin:-10px;
+ 
+}
+
+.flex>* {
+  flex: 1 1 auto;
+  margin: 10px;
+}
+
+.logo {
+  width: 150px;
+  margin: 0 auto;
+}
+
+q {
+  font-style: italic;
+  quotes: "« " " »";
+}
